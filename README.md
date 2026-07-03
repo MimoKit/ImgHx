@@ -16,7 +16,7 @@
 
 > **ImgHx 是 [早柚核心 / GsCore](https://github.com/Genshin-bots/gsuid_core) 的扩展插件，需要先安装并运行好 GsCore 环境。**
 >
-> 插件本身只包含一个 `__init__.py`，直接放入 GsCore 插件目录后重启 Core 即可加载。
+> 插件安装 直接克隆 GsCore 插件目录后重启 Core 即可加载。
 
 ## 功能
 
