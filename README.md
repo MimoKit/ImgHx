@@ -7,11 +7,6 @@
 <h1 align="center">ImgHx</h1>
 <h4 align="center">基于 Gilbert 空间填充曲线的图片混淆 / 解混淆 GsCore 插件</h4>
 
-<div align="center">
-  <a href="https://github.com/nnlmc/ImgHx" target="_blank">GitHub</a> &nbsp; · &nbsp;
-  <a href="https://github.com/Genshin-bots/gsuid_core" target="_blank">gsuid_core</a>
-</div>
-
 ## 安装提醒
 
 > **ImgHx 是 [早柚核心 / GsCore](https://github.com/Genshin-bots/gsuid_core) 的扩展插件，需要先安装并运行好 GsCore 环境。**
