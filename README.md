@@ -1,8 +1,4 @@
-# ImgHx
 
-<p align="center">
-  <a href="https://github.com/nnlmc/ImgHx"><strong>ImgHx</strong></a>
-</p>
 
 <h1 align="center">ImgHx</h1>
 <h4 align="center">基于 Gilbert 空间填充曲线的图片混淆 / 解混淆 GsCore 插件</h4>
