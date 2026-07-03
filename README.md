@@ -1,0 +1,160 @@
+# ImgHx
+
+<p align="center">
+  <a href="https://github.com/nnlmc/ImgHx"><strong>ImgHx</strong></a>
+</p>
+
+<h1 align="center">ImgHx</h1>
+<h4 align="center">基于 Gilbert 空间填充曲线的图片混淆 / 解混淆 GsCore 插件</h4>
+
+<div align="center">
+  <a href="https://github.com/nnlmc/ImgHx" target="_blank">GitHub</a> &nbsp; · &nbsp;
+  <a href="https://github.com/Genshin-bots/gsuid_core" target="_blank">gsuid_core</a>
+</div>
+
+## 安装提醒
+
+> **ImgHx 是 [早柚核心 / GsCore](https://github.com/Genshin-bots/gsuid_core) 的扩展插件，需要先安装并运行好 GsCore 环境。**
+>
+> 插件本身只包含一个 `__init__.py`，直接放入 GsCore 插件目录后重启 Core 即可加载。
+
+## 功能
+
+ImgHx 可以对图片进行像素级重排，实现图片混淆和反向解混淆：
+
+- 使用 Gilbert 二维空间填充曲线生成像素遍历路径
+- 按固定偏移重新排列 RGBA 像素
+- `混淆` 与 `解混淆` 互为反向操作
+- 处理结果统一以 PNG 图片发送
+- 支持群聊中直接发送图片并附带命令
+
+> 注意：ImgHx 的“混淆”是图像像素重排，不是密码学意义上的安全加密。它适合娱乐、简单隐藏预览或图像玩法，不适合保护敏感信息。
+
+## 命令
+
+| 命令 | 说明 |
+| --- | --- |
+| `混淆 [图片]` | 将图片进行混淆处理 |
+| `图片混淆 [图片]` | `混淆` 的别名 |
+| `解混淆 [图片]` | 将 ImgHx 混淆后的图片还原 |
+| `图片解混淆 [图片]` | `解混淆` 的别名 |
+
+示例：
+
+```text
+混淆 [图片]
+解混淆 [图片]
+```
+
+如果没有同时发送图片，插件会提示：
+
+```text
+请同时发送图片，例如：混淆 [图片]
+```
+
+## 图片来源
+
+插件会优先从 GsCore 事件中读取图片消息，同时内部也兼容以下图片引用形式：
+
+- 普通图片消息
+- `data:image/...`
+- `base64://...`
+- `link://...`
+- `http://` / `https://` 图片地址
+- 本地图片路径
+
+单张图片最大读取大小为 **20MB**。超过限制、图片无法读取、图片格式无法识别时，会返回失败提示。
+
+## 依赖
+
+运行环境需要：
+
+- Python `>=3.10`
+- 已可用的 `gsuid_core`
+- `Pillow`
+
+如果当前 GsCore 环境没有 Pillow，可以在同一 Python 环境中安装：
+
+```bash
+pip install "pillow>=10.0.0"
+```
+
+## 安装方式
+
+将插件目录放入 GsCore 插件目录，保证结构类似：
+
+```text
+gsuid_core/gsuid_core/plugins/
+└── ImgHx/
+    ├── __init__.py
+    ├── README.md
+    ├── pyproject.toml
+    ├── LICENSE
+    └── .gitignore
+```
+
+然后重启 Core 或重载插件。
+
+如果使用 Git 克隆：
+
+```bash
+cd /path/to/gsuid_core/gsuid_core/plugins
+git clone https://github.com/nnlmc/ImgHx.git
+```
+
+## 目录结构
+
+```text
+ImgHx/
+├── __init__.py       # 插件主体逻辑与命令注册
+├── README.md         # 使用文档
+├── pyproject.toml    # 插件元数据与依赖声明
+├── LICENSE           # GPL-3.0 许可证
+└── .gitignore
+```
+
+## 工作原理简述
+
+插件会将输入图片转换为 RGBA 像素数据，然后：
+
+1. 根据图片宽高生成 Gilbert 空间填充曲线坐标序列；
+2. 使用黄金比例相关的固定偏移量移动曲线上的像素位置；
+3. `混淆` 时按偏移后的坐标写入像素；
+4. `解混淆` 时按相反方向恢复像素；
+5. 最终输出 PNG 图片。
+
+因此，只要图片没有被压缩破坏像素数据，使用 `解混淆` 可以还原由 ImgHx 生成的混淆图。
+
+## 故障排查
+
+### 提示“请同时发送图片”
+
+说明命令触发成功，但消息里没有可读取的图片。请在同一条消息中附带图片。
+
+### 提示“读取图片失败，请重试。”
+
+可能原因：
+
+- 图片地址过期或无法访问
+- 图片超过 20MB
+- 当前平台传入的图片字段不被适配器支持
+- 本地路径不存在或机器人进程无权限读取
+
+### 提示“处理图片失败，请重试。”
+
+可能原因：
+
+- 输入内容不是有效图片
+- Pillow 无法识别该图片格式
+- 图片尺寸过大导致处理耗时或内存不足
+
+## 适用场景
+
+- 群聊娱乐图片玩法
+- 图片混淆挑战
+- 简单隐藏图片内容预览
+- GsCore 插件开发示例
+
+## 许可证
+
+本项目采用 **GNU General Public License v3.0** 开源，详见 [LICENSE](LICENSE)。

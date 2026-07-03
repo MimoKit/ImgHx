@@ -1,0 +1,24 @@
+[project]
+name = "ImgHx"
+version = "0.1.0"
+description = "基于 Gilbert 空间填充曲线的图片混淆/解混淆 GsCore 插件"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-or-later" }
+authors = [
+    { name = "nnlmc" },
+]
+dependencies = [
+    "pillow>=10.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/nnlmc/ImgHx"
+Repository = "https://github.com/nnlmc/ImgHx"
+Issues = "https://github.com/nnlmc/ImgHx/issues"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.format]
+quote-style = "single"
