@@ -1,4 +1,4 @@
-
+﻿
 
 <h1 align="center">ImgHx</h1>
 <h4 align="center">基于 Gilbert 空间填充曲线的图片混淆 / 解混淆 GsCore 插件</h4>
@@ -90,7 +90,7 @@ gsuid_core/gsuid_core/plugins/
 
 ```bash
 cd /path/to/gsuid_core/gsuid_core/plugins
-git clone https://github.com/nnlmc/ImgHx.git
+git clone https://github.com/MimoKit/ImgHx.git
 ```
 
 ## 目录结构
